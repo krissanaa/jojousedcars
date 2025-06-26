@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Sale Poster</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f5f7fa;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    }
+    .frame {
+      position: relative;
+      width: 100%;
+      background: linear-gradient(135deg, #1c1c1c, #2c2c2c);
+      color: white;
+    }
+    .image-container {
+      height: 400px;
+      background: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+    .image-placeholder {
+      color: #bbb;
+      font-size: 1.1rem;
+    }
+    .info {
+      padding: 2rem;
+    }
+    .shop-name {
+      font-size: 1.4rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .shop-desc {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+    .car-title {
+      font-size: 1.8rem;
+      margin: 1rem 0;
+      font-weight: bold;
+    }
+    .details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .detail-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .detail-label {
+      font-size: 0.75rem;
+      color: #bbb;
+    }
+    .detail-value {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .price-box {
+      background: linear-gradient(45deg, #c5282f, #e74c3c);
+      padding: 1rem;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .price {
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+    }
+    .contact {
+      font-size: 1.2rem;
+      color: white;
+      text-align: center;
+    }
+    .form-area {
+      margin-top: 2rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .download-btn {
+      background: linear-gradient(45deg, #c5282f, #e74c3c);
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: block;
+      margin: 2rem auto 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="frame" id="frameContainer">
+      <div class="image-container">
+        <div class="image-placeholder" id="imagePlaceholder">อัปโหลดรูปรถ</div>
+        <img id="carImageDisplay">
+      </div>
+      <div class="info">
+        <div class="shop-name" id="logoText">YOUR AUTO</div>
+        <div class="shop-desc" id="logoSubtext">USED CAR</div>
+        <div class="car-title" id="carTitle">TOYOTA CAMRY 2020</div>
+        <div class="details">
+          <div class="detail-box"><div class="detail-label">ปี</div><div class="detail-value" id="displayYear">2020</div></div>
+          <div class="detail-box"><div class="detail-label">เลขไมล์</div><div class="detail-value" id="displayMileage">45,000 กม.</div></div>
+          <div class="detail-box"><div class="detail-label">เกียร์</div><div class="detail-value" id="displayTransmission">เกียร์อัตโนมัติ</div></div>
+          <div class="detail-box"><div class="detail-label">เชื้อเพลิง</div><div class="detail-value" id="displayFuel">เบนซิน</div></div>
+          <div class="detail-box"><div class="detail-label">สี</div><div class="detail-value" id="displayColor">ขาว</div></div>
+          <div class="detail-box"><div class="detail-label">เบอร์ติดต่อ</div><div class="detail-value" id="displayPhone">020 93964273</div></div>
+        </div>
+        <div class="price-box">
+          <div class="price" id="displayPrice">฿850,000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-area">
+      <div class="form-group">
+        <label>เลือกรูปรถ:</label>
+        <input type="file" id="carImage" accept="image/*">
+      </div>
+      <div class="form-group"><label>ชื่อร้าน:</label><input type="text" id="shopName" value="YOUR AUTO"></div>
+      <div class="form-group"><label>คำอธิบายร้าน:</label><input type="text" id="shopDesc" value="USED CAR"></div>
+      <div class="form-group"><label>ยี่ห้อและรุ่น:</label><input type="text" id="carModel" value="TOYOTA CAMRY 2020"></div>
+      <div class="form-group"><label>ปี:</label><input type="text" id="carYear" value="2020"></div>
+      <div class="form-group"><label>เลขไมล์:</label><input type="text" id="carMileage" value="45,000 กม."></div>
+      <div class="form-group"><label>เกียร์:</label><select id="carTransmission"><option>เกียร์อัตโนมัติ</option><option>เกียร์ธรรมดา</option></select></div>
+      <div class="form-group"><label>เชื้อเพลิง:</label><select id="carFuel"><option>เบนซิน</option><option>ดีเซล</option><option>ไฮบริด</option><option>ไฟฟ้า</option></select></div>
+      <div class="form-group"><label>สี:</label><input type="text" id="carColor" value="ขาว"></div>
+      <div class="form-group"><label>ราคา:</label><input type="text" id="carPrice" value="850,000"></div>
+      <div class="form-group"><label>เบอร์โทร:</label><input type="text" id="phoneNumber" value="020 93964273"></div>
+    </div>
+
+    <button class="download-btn" onclick="downloadImage()">ดาวน์โหลดเป็น PNG</button>
+  </div>
+
+  <script>
+    function updateDisplay() {
+      document.getElementById('logoText').textContent = document.getElementById('shopName').value;
+      document.getElementById('logoSubtext').textContent = document.getElementById('shopDesc').value;
+      document.getElementById('carTitle').textContent = document.getElementById('carModel').value;
+      document.getElementById('displayYear').textContent = document.getElementById('carYear').value;
+      document.getElementById('displayMileage').textContent = document.getElementById('carMileage').value;
+      document.getElementById('displayTransmission').textContent = document.getElementById('carTransmission').value;
+      document.getElementById('displayFuel').textContent = document.getElementById('carFuel').value;
+      document.getElementById('displayColor').textContent = document.getElementById('carColor').value;
+      document.getElementById('displayPrice').textContent = '฿' + document.getElementById('carPrice').value;
+      document.getElementById('displayPhone').textContent = document.getElementById('phoneNumber').value;
+    }
+    document.querySelectorAll('input, select').forEach(e => e.addEventListener('input', updateDisplay));
+
+    document.getElementById('carImage').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.getElementById('carImageDisplay');
+          img.src = e.target.result;
+          img.style.display = 'block';
+          document.getElementById('imagePlaceholder').style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function downloadImage() {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+      script.onload = function() {
+        html2canvas(document.getElementById('frameContainer')).then(canvas => {
+          const link = document.createElement('a');
+          link.download = 'car-poster-' + Date.now() + '.png';
+          link.href = canvas.toDataURL();
+          link.click();
+        });
+      };
+      document.body.appendChild(script);
+    }
+  </script>
+</body>
+</html>
